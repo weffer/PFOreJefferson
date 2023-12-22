@@ -290,7 +290,8 @@ function fnVerCarrito() {
           if (localStorage.getItem("lstCarrito")) {
             lstCarrito = {};
             localStorage.removeItem("lstCarrito");
-            window.location.href = window.location.origin + "/index.html";
+            window.location.href =
+              window.location.origin + "PFOreJefferson/index.html";
           }
 
           crearCoffeti();
