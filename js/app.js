@@ -1,5 +1,4 @@
 //sacando ruta de la url actual
-//var ruta = window.location.pathname;
 
 funcionalidadPaginas(fnInicio, fnProductos, fnVerCarrito, fnVerProducto);
 
