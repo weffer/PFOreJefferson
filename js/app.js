@@ -288,7 +288,11 @@ function fnVerCarrito() {
           alert("Se proceso el pago");
 
           if (localStorage.getItem("lstCarrito")) {
-            lstCarrito = {};
+            lstCarrito = {
+              productos: [],
+              cantidad: 0,
+              total: 0,
+            };
             localStorage.removeItem("lstCarrito");
             fnVerCarrito();
           }
