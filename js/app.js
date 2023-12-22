@@ -291,7 +291,7 @@ function fnVerCarrito() {
             lstCarrito = {};
             localStorage.removeItem("lstCarrito");
             window.location.href =
-              window.location.origin + "PFOreJefferson/index.html";
+              window.location.origin + "/PFOreJefferson/index.html";
           }
 
           crearCoffeti();
