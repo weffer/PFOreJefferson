@@ -294,6 +294,8 @@ function fnVerCarrito() {
               total: 0,
             };
             localStorage.removeItem("lstCarrito");
+            document.querySelector("#cantidadCarrito").innerText =
+              lstCarrito.cantidad;
             fnVerCarrito();
           }
 
