@@ -20,7 +20,7 @@ function fnInicio() {
 
   function cargarProductos(productos) {
     let productosHTML = "";
-    productos.forEach(function ({ imagen, nombre, descripcion, precio, id }) {
+    productos.forEach(({ imagen, nombre, descripcion, precio, id }) => {
       productosHTML += `<div class="col-md-6 col-lg-4 my-4 row">
                           <div class="col-4">
                             <img
@@ -77,7 +77,7 @@ function fnProductos() {
   function cargarProductos(productos) {
     //Recorrer los productos
     let productosHTML = "";
-    productos.forEach(function ({ imagen, nombre, descripcion, precio, id }) {
+    productos.forEach(({ imagen, nombre, descripcion, precio, id }) => {
       productosHTML += `<div class="col-md-6 col-lg-4 my-4 row">
                           <div class="col-4">
                             <img
@@ -105,16 +105,16 @@ function fnProductos() {
 
   function filtroPorNombre() {
     if (document.querySelector("#txtDescripcion").value.length > 0) {
-      let filtroXDescripcion = lstProductos.filter((producto) => {
-        return producto.descripcion
+      let filtroXDescripcion = lstProductos.filter(({ descripcion }) => {
+        return descripcion
           .toLowerCase()
           .includes(
             document.querySelector("#txtDescripcion").value.toLowerCase().trim()
           );
       });
 
-      let filtroXnombre = filtroXDescripcion.filter((producto) => {
-        return producto.nombre
+      let filtroXnombre = filtroXDescripcion.filter(({ nombre }) => {
+        return nombre
           .toLowerCase()
           .includes(
             document.querySelector("#txtNombre").value.toLowerCase().trim()
@@ -122,8 +122,8 @@ function fnProductos() {
       });
       cargarProductos(filtroXnombre);
     } else {
-      let filtroXnombre = lstProductos.filter((producto) => {
-        return producto.nombre
+      let filtroXnombre = lstProductos.filter(({ nombre }) => {
+        return nombre
           .toLowerCase()
           .includes(
             document.querySelector("#txtNombre").value.toLowerCase().trim()
@@ -144,8 +144,8 @@ function fnProductos() {
           );
       });
 
-      filtroXDescripcion = filtroXnombre.filter((producto) => {
-        return producto.descripcion
+      filtroXDescripcion = filtroXnombre.filter(({ descripcion }) => {
+        return descripcion
           .toLowerCase()
           .includes(
             document.querySelector("#txtDescripcion").value.toLowerCase().trim()
@@ -153,8 +153,8 @@ function fnProductos() {
       });
       cargarProductos(filtroXDescripcion);
     } else {
-      let filtroXDescripcion = lstProductos.filter((producto) => {
-        return producto.descripcion
+      let filtroXDescripcion = lstProductos.filter(({ descripcion }) => {
+        return descripcion
           .toLowerCase()
           .includes(
             document.querySelector("#txtDescripcion").value.toLowerCase().trim()
@@ -169,41 +169,35 @@ function fnVerCarrito() {
   console.log("Ver Carrito");
   let carritoHTML = "";
   if (lstCarrito.productos.length > 0) {
-    lstCarrito.productos.forEach(function (carrito) {
-      carritoHTML += `<div class="row carrito align-items-center">
+    lstCarrito.productos.forEach(
+      ({ id, imagen, descripcion, nombre, precio, cantidad }) => {
+        carritoHTML += `<div class="row carrito align-items-center">
                         <div class="col-auto">
                           <div class="p-2">
-                            <input type="checkbox" checked="" data-id="${
-                              carrito.id
-                            }"/>
+                            <input type="checkbox" checked="" data-id="${id}"/>
                           </div>
                         </div>
                         <div class="col-auto">
-                          <img class='img-fluid producto' src="../${
-                            carrito.imagen
-                          }" alt='${carrito.nombre}'/>
+                          <img class='img-fluid producto' src="../${imagen}" alt='${nombre}'/>
                         </div>
                         <div class="col h-100">
-                          <p class="p-2 overflow-auto">${
-                            carrito.descripcion
-                          }</p>
+                          <p class="p-2 overflow-auto">${descripcion}</p>
                         </div>
                         <div class="col">
-                          <h5>${carrito.nombre}</h5>
-                          <p>Precio: $${carrito.precio}</p>
-                          <p>Cantidad: ${carrito.cantidad}</p
-                          <p>$${carrito.cantidad * carrito.precio}</p
+                          <h5>${nombre}</h5>
+                          <p>Precio: $${precio}</p>
+                          <p>Cantidad: ${cantidad}</p
+                          <p>$${cantidad * precio}</p
                         </div>
                           <div class="col-auto">                            
-                              <a href="javascript:void(0);" class="deleteCard" data-id="${
-                                carrito.id
-                              }">
+                              <a href="javascript:void(0);" class="deleteCard" data-id="${id}">
                                 <i class="bi bi-trash eliminar"></i>
                               </a>                            
                           </div>
                         </div>
                       </div>`;
-    });
+      }
+    );
 
     carritoHTML += `<div class="total">
                       <p>Total: $<span id="total">${lstCarrito.total}</span> </p>                      
@@ -216,13 +210,13 @@ function fnVerCarrito() {
     let checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
     //recorrer los input checkbox
-    checkboxes.forEach(function (checkbox) {
+    checkboxes.forEach((checkbox) => {
       checkbox.addEventListener("change", function (event) {
         let idChecked = [];
         //Para obtener los checbox que tiene checked
         document
           .querySelectorAll('input[type="checkbox"]:checked')
-          .forEach(function (checkbox) {
+          .forEach((checkbox) => {
             let id = checkbox.getAttribute("data-id");
             idChecked.push(Number(id));
           });
